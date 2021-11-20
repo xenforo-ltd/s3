@@ -664,9 +664,10 @@ class Input
 
 				while ($done < $size)
 				{
-					$toRead = min($batch, $done - $size);
+					$toRead = min($batch, $size - $done);
 					$data   = @fread($this->fp, $toRead);
 					hash_update($ctx, $data);
+					$done += $toRead;
 					unset($data);
 				}
 
