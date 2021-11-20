@@ -171,17 +171,6 @@ class Input
 	}
 
 	/**
-	 * Destructor.
-	 */
-	function __destruct()
-	{
-		if (is_resource($this->fp))
-		{
-			@fclose($this->fp);
-		}
-	}
-
-	/**
 	 * Returns the input type (resource, file or data)
 	 *
 	 * @return  int
