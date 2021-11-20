@@ -9,7 +9,6 @@
 
 namespace Akeeba\Engine\Postproc\Connector\S3v4;
 
-// Protection against direct access
 use Akeeba\Engine\Postproc\Connector\S3v4\Exception\CannotDeleteFile;
 use Akeeba\Engine\Postproc\Connector\S3v4\Exception\CannotGetBucket;
 use Akeeba\Engine\Postproc\Connector\S3v4\Exception\CannotGetFile;
@@ -17,8 +16,6 @@ use Akeeba\Engine\Postproc\Connector\S3v4\Exception\CannotListBuckets;
 use Akeeba\Engine\Postproc\Connector\S3v4\Exception\CannotOpenFileForWrite;
 use Akeeba\Engine\Postproc\Connector\S3v4\Exception\CannotPutFile;
 use Akeeba\Engine\Postproc\Connector\S3v4\Response\Error;
-
-defined('AKEEBAENGINE') or die();
 
 class Connector
 {

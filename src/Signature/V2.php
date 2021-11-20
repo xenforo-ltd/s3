@@ -9,9 +9,6 @@
 
 namespace Akeeba\Engine\Postproc\Connector\S3v4\Signature;
 
-// Protection against direct access
-defined('AKEEBAENGINE') or die();
-
 use Akeeba\Engine\Postproc\Connector\S3v4\Signature;
 
 /**

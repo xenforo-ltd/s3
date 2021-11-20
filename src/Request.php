@@ -11,10 +11,6 @@ namespace Akeeba\Engine\Postproc\Connector\S3v4;
 
 use Akeeba\Engine\Postproc\Connector\S3v4\Response\Error;
 
-// Protection against direct access
-defined('AKEEBAENGINE') or die();
-
-
 class Request
 {
 	/**

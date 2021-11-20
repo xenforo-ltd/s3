@@ -9,9 +9,6 @@
 
 namespace Akeeba\Engine\Postproc\Connector\S3v4;
 
-// Protection against direct access
-defined('AKEEBAENGINE') or die();
-
 /**
  * Defines an input source for PUT/POST requests to Amazon S3
  */

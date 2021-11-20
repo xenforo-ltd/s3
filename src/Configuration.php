@@ -9,9 +9,6 @@
 
 namespace Akeeba\Engine\Postproc\Connector\S3v4;
 
-// Protection against direct access
-defined('AKEEBAENGINE') or die();
-
 /**
  * Holds the Amazon S3 confiugration credentials
  */

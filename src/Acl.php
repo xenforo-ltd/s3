@@ -9,9 +9,6 @@
 
 namespace Akeeba\Engine\Postproc\Connector\S3v4;
 
-// Protection against direct access
-defined('AKEEBAENGINE') or die();
-
 /**
  * Shortcuts to often used access control privileges
  */

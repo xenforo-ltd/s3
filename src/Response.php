@@ -13,9 +13,6 @@ use Akeeba\Engine\Postproc\Connector\S3v4\Exception\PropertyNotFound;
 use Akeeba\Engine\Postproc\Connector\S3v4\Response\Error;
 use SimpleXMLElement;
 
-// Protection against direct access
-defined('AKEEBAENGINE') or die();
-
 /**
  * Amazon S3 API response object
  *

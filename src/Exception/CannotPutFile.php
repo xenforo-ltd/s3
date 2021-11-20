@@ -9,9 +9,6 @@
 
 namespace Akeeba\Engine\Postproc\Connector\S3v4\Exception;
 
-// Protection against direct access
-defined('AKEEBAENGINE') or die();
-
 use RuntimeException;
 
 class CannotPutFile extends RuntimeException
