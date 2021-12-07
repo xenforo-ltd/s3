@@ -218,6 +218,41 @@ class Connector
 	}
 
 	/**
+	 * Returns the access control list (ACL) of an object.
+	 * 
+	 * @param string $bucket
+	 * @param string $uri
+	 *
+	 * @return \SimpleXMLElement|string|null
+	 */
+	public function getObjectAcl(string $bucket, string $uri)
+	{
+		$request = new Request('GET', $bucket, $uri, $this->configuration);
+		$request->setParameter('acl', true);
+
+		$response = $request->getResponse();
+
+		if (!$response->error->isError() && (($response->code !== 200) && ($response->code !== 206)))
+		{
+			$response->error = new Error(
+				$response->code,
+				"Unexpected HTTP status {$response->code}"
+			);
+		}
+
+		if ($response->error->isError())
+		{
+			throw new CannotGetFile(
+				sprintf(__METHOD__ . "({$bucket}, {$uri}): [%s] %s\n\nDebug info:\n%s",
+					$response->error->getCode(), $response->error->getMessage(), print_r($response->body, true)),
+				$response->error->getCode()
+			);
+		}
+
+		return $response->getBody();
+	}
+
+	/**
 	 * Get information about an object.
 	 *
 	 * @param   string                $bucket  Bucket name
