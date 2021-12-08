@@ -253,6 +253,44 @@ class Connector
 	}
 
 	/**
+	 * Modify an object's ACL
+	 *
+	 * @param string $bucket
+	 * @param string $uri
+	 * @param string $acl
+	 *
+	 * @return bool
+	 */
+	public function putObjectAcl(string $bucket, string $uri, string $acl = Acl::ACL_PRIVATE)
+	{
+		$request = new Request('PUT', $bucket, $uri, $this->configuration);
+		$request->setParameter('acl', true);
+
+		$request->setAmzHeader('x-amz-acl', $acl);
+
+		$response = $request->getResponse();
+
+		if (!$response->error->isError() && (($response->code !== 200) && ($response->code !== 206)))
+		{
+			$response->error = new Error(
+				$response->code,
+				"Unexpected HTTP status {$response->code}"
+			);
+		}
+
+		if ($response->error->isError())
+		{
+			throw new CannotPutAcl(
+				sprintf(__METHOD__ . "({$bucket}, {$uri}): [%s] %s\n\nDebug info:\n%s",
+					$response->error->getCode(), $response->error->getMessage(), print_r($response->body, true)),
+				$response->error->getCode()
+			);
+		}
+
+		return true;
+	}
+
+	/**
 	 * Get information about an object.
 	 *
 	 * @param   string                $bucket  Bucket name
