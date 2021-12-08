@@ -289,6 +289,48 @@ class Connector
 		return $response->getHeaders();
 	}
 
+	/**
+	 * Copy an object
+	 * 
+	 * @param string $sourceBucket
+	 * @param string $sourceUri
+	 * @param string $destBucket
+	 * @param string $destUri
+	 * @param string $visibility
+	 *
+	 * @return bool
+	 */
+	public function copyObject(
+		string $sourceBucket, string $sourceUri, string $destBucket, string $destUri, string $visibility = Acl::ACL_PRIVATE
+	): bool
+	{
+		$sourceLocation = urlencode($sourceBucket . '/' . $sourceUri);
+		$request = new Request('PUT', $destBucket, $destUri, $this->configuration);
+
+		$request->setAmzHeader('x-amz-acl', $visibility);
+		$request->setAmzHeader('x-amz-copy-source', $sourceLocation);
+
+		$response = $request->getResponse();
+
+		if ($response->code !== 200)
+		{
+			if (!$response->error->isError())
+			{
+				throw new CannotPutFile("Unexpected HTTP status {$response->code}", $response->code);
+			}
+
+			return false;
+		}
+
+		if ($response->error->isError())
+		{
+			throw new CannotPutFile(
+				sprintf(__METHOD__ . "(): [%s] %s\n\nDebug info:\n%s", $response->error->getCode(), $response->error->getMessage(), print_r($response->body, true))
+			);
+		}
+
+		return true;
+	}
 
 	/**
 	 * Delete an object
