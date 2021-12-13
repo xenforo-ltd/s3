@@ -604,6 +604,7 @@ class Connector
 			foreach ($response->body->Contents as $c)
 			{
 				$results[(string) $c->Key] = [
+					'Key' => (string) $c->Key,
 					'name' => (string) $c->Key,
 					'time' => strtotime((string) $c->LastModified),
 					'size' => (int) $c->Size,
@@ -674,6 +675,7 @@ class Connector
 					foreach ($response->body->Contents as $c)
 					{
 						$results[(string) $c->Key] = [
+							'Key' => (string) $c->Key,
 							'name' => (string) $c->Key,
 							'time' => strtotime((string) $c->LastModified),
 							'size' => (int) $c->Size,
