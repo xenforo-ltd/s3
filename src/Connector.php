@@ -203,9 +203,13 @@ class Connector
 		if ($response->error->isError())
 		{
 			throw new CannotGetFile(
-				sprintf(__METHOD__ . "({$bucket}, {$uri}): [%s] %s\n\nDebug info:\n%s",
-					$response->error->getCode(), $response->error->getMessage(), print_r($response->body, true)),
-				$response->error->getCode()
+				sprintf(__METHOD__ . "({%s}, {%s}): [%s] %s\n\nDebug info:\n%s",
+					$bucket,
+					$uri,
+					$response->error->getCode(),
+					$response->error->getMessage(),
+					print_r($response->body, true)
+				)
 			);
 		}
 
@@ -320,9 +324,13 @@ class Connector
 		if ($response->error->isError())
 		{
 			throw new CannotGetFile(
-				sprintf(__METHOD__ . "({$bucket}, {$uri}): [%s] %s\n\nDebug info:\n%s",
-					$response->error->getCode(), $response->error->getMessage(), print_r($response->body, true)),
-				$response->error->getCode()
+				sprintf(__METHOD__ . "({%s}, {%s}): [%s] %s\n\nDebug info:\n%s",
+					$bucket,
+					$uri,
+					$response->error->getCode(),
+					$response->error->getMessage(),
+					print_r($response->body, true)
+				)
 			);
 		}
 
@@ -396,9 +404,12 @@ class Connector
 		if ($response->error->isError())
 		{
 			throw new CannotDeleteFile(
-				sprintf(__METHOD__ . "({$bucket}, {$uri}): [%s] %s",
-					$response->error->getCode(), $response->error->getMessage()),
-				$response->error->getCode()
+				sprintf(__METHOD__ . "({%s}, {%s}): [%s] %s",
+					$bucket,
+					$uri,
+					$response->error->getCode(),
+					$response->error->getMessage()
+				)
 			);
 		}
 	}
@@ -510,8 +521,7 @@ class Connector
 		if ($response->error->isError())
 		{
 			throw new CannotGetBucket(
-				sprintf(__METHOD__ . "(): [%s] %s", $response->error->getCode(), $response->error->getMessage()),
-				$response->error->getCode()
+				sprintf(__METHOD__ . "(): [%s] %s", $response->error->getCode(), $response->error->getMessage())
 			);
 		}
 
@@ -590,8 +600,7 @@ class Connector
 		if ($response->error->isError())
 		{
 			throw new CannotGetBucket(
-				sprintf(__METHOD__ . "(): [%s] %s", $response->error->getCode(), $response->error->getMessage()),
-				$response->error->getCode()
+				sprintf(__METHOD__ . "(): [%s] %s", $response->error->getCode(), $response->error->getMessage())
 			);
 		}
 
@@ -748,8 +757,7 @@ class Connector
 		if ($response->error->isError())
 		{
 			throw new CannotListBuckets(
-				sprintf(__METHOD__ . "(): [%s] %s", $response->error->getCode(), $response->error->getMessage()),
-				$response->error->getCode()
+				sprintf(__METHOD__ . "(): [%s] %s", $response->error->getCode(), $response->error->getMessage())
 			);
 		}
 
@@ -845,7 +853,11 @@ class Connector
 		if ($response->error->isError())
 		{
 			throw new CannotPutFile(
-				sprintf(__METHOD__ . "(): [%s] %s\n\nDebug info:\n%s", $response->error->getCode(), $response->error->getMessage(), print_r($response->body, true))
+				sprintf(__METHOD__ . "(): [%s] %s\n\nDebug info:\n%s",
+					$response->error->getCode(),
+					$response->error->getMessage(),
+					print_r($response->body, true)
+				)
 			);
 		}
 
