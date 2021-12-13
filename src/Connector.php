@@ -158,7 +158,7 @@ class Connector
 	 * @return  string|null  No return if $saveTo is specified; data as string otherwise
 	 *
 	 */
-	public function getObject(string $bucket, string $uri, $saveTo = null, ?int $from = null, ?int $to = null): ?string
+	public function getObject(string $bucket, string $uri, $saveTo = null, ?int $from = null, ?int $to = null): ?array
 	{
 		$request = new Request('GET', $bucket, $uri, $this->configuration);
 
@@ -211,7 +211,9 @@ class Connector
 
 		if (!is_resource($fp))
 		{
-			return $response->body;
+			$result = $response->headers;
+			$result['body'] = $response->body;
+			return $result;
 		}
 
 		return null;
