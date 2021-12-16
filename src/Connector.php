@@ -1116,6 +1116,30 @@ class Connector
 	}
 
 	/**
+	 * @param string $bucket
+	 * @param string $key
+	 *
+	 * @return bool
+	 */
+	public function doesObjectExist(string $bucket, string $key): bool
+	{
+		try
+		{
+			$response = $this->headObject($bucket, $key);
+			return true;
+		}
+		catch (\Exception $e)
+		{
+			if ($e->getCode() >= 500)
+			{
+				throw $e;
+			}
+
+			return false;
+		}
+	}
+
+	/**
 	 * Returns the configuration object
 	 *
 	 * @return  Configuration
