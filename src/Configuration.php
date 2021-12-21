@@ -196,6 +196,8 @@ class Configuration
 			throw new Exception\InvalidSignatureMethod;
 		}
 
+		$this->signatureMethod = $signatureMethod;
+
 		// If you switch to v2 signatures we unset the region.
 		if ($signatureMethod == 'v2')
 		{
@@ -212,8 +214,6 @@ class Configuration
 			}
 
 		}
-
-		$this->signatureMethod = $signatureMethod;
 	}
 
 	/**
