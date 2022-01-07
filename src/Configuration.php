@@ -77,7 +77,7 @@ class Configuration
 	 *
 	 * @var  string
 	 */
-	protected $endpoint = 'https://s3.amazonaws.com';
+	protected $endpoint = 's3.amazonaws.com';
 
 	/**
 	 * Public constructor
@@ -246,7 +246,7 @@ class Configuration
 		 * endpoint. If you're using a custom endpoint and provide a region with 'cn-' in its name we don't override
 		 * your custom endpoint.
 		 */
-		if (($this->endpoint == 'https://s3.amazonaws.com') && (substr($region, 0, 3) == 'cn-'))
+		if (($this->endpoint == 's3.amazonaws.com') && (substr($region, 0, 3) == 'cn-'))
 		{
 			$this->setEndpoint('amazonaws.com.cn');
 		}
@@ -285,12 +285,17 @@ class Configuration
 	}
 
 	/**
-	 * Set the Amazon S3 endpoint.
+	 * Set the Amazon S3 endpoint. Do NOT use a protocol
 	 *
-	 * @param   string  $endpoint  Custom endpoint, e.g. 'https://s3.example.com' or 'https://www.example.com/s3api'
+	 * @param   string  $endpoint  Custom endpoint, e.g. 's3.example.com' or 'www.example.com/s3api'
 	 */
 	public function setEndpoint(string $endpoint): void
 	{
+		if (stristr($endpoint, '://'))
+		{
+			throw new Exception\InvalidEndpoint;
+		}
+
 		/**
 		 * If you set a custom endpoint we have to switch to v2 signatures since our v4 implementation only supports
 		 * Amazon endpoints.
